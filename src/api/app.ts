@@ -1,9 +1,8 @@
-import express, { Request, Response } from 'express'
+import express from 'express'
+import { root } from '../controller/root'
 
 export const app = express()
 
 app.use(express.json())
 
-app.get('/', function (_req: Request, res: Response): void {
-  res.status(200).send({ message: 'hello word' })
-})
+app.use('/', root)
