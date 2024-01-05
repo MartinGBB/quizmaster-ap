@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "ES6",
+    "outDir": "./dist",
+    "rootDir": "./src/api",
+    "lib": ["ES6"],
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "ts-node": { "esm": true },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+  
+}
