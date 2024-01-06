@@ -1,8 +1,8 @@
 import express from 'express'
-import { login } from './login'
+import { findQuestions } from './findQuestions'
 
 const router = express.Router({ mergeParams: true })
 
-router.get('/questions', login)
+router.get('/', findQuestions)
 
 export { router }
