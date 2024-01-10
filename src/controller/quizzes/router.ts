@@ -1,5 +1,5 @@
 import express from 'express'
-import { findQuestions } from './findQuestions'
+import { findQuestions } from './getAllQuestions'
 
 const router = express.Router({ mergeParams: true })
 

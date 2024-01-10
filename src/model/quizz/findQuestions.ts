@@ -1,13 +1,15 @@
-import { connectionDB } from '../connection'
+import { connection } from '../connection'
 
-export const allItems = async () => {
-  try {
-    const db = await connectionDB()
-    const query = await db?.query('SELECT * FROM quizmaster.questions')
-
-    return [query]
-  } catch (error) {
-    console.error('Error fetching questions:', error)
-    throw error
-  }
+export function getAllQuestions() {
+  return new Promise((resolve, reject) => {
+    connection.query('SELECT * FROM questions', (err, results) => {
+      if (err) {
+        reject(err)
+        throw new Error('Error executing query: ' + err.stack)
+      } else {
+        resolve(results)
+      }
+      connection.end()
+    })
+  })
 }

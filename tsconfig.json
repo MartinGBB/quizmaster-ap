@@ -6,7 +6,8 @@
     "rootDir": "./src",
     "lib": ["ES6"],
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "Node"
   },
   "ts-node": { "esm": true },
   "include": ["src/**/*"],
