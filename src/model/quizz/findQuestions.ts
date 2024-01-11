@@ -9,7 +9,6 @@ export function getAllQuestions() {
       } else {
         resolve(results)
       }
-      connection.end()
     })
   })
 }

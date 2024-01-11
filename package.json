@@ -6,8 +6,8 @@
   "main": "src/api/server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev .",
-    "dev": "nodemon -I --exec node --experimental-specifier-resolution=node  --loader ts-node/esm ./src/api/server.ts",
+    "start": "tsx .",
+    "dev": "nodemon --exec tsx .",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix"
   },
@@ -17,7 +17,8 @@
   "dependencies": {
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "mysql": "^2.18.1"
+    "mysql2": "^3.7.0",
+    "npx": "^10.2.2"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.1.0",
