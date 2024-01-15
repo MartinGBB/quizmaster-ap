@@ -1,10 +1,10 @@
 import { StatusCodes, getReasonPhrase } from 'http-status-codes'
 
-export const ACCEPTED = StatusCodes.ACCEPTED
+export const OK = StatusCodes.OK
 
-export const NO_CONTENT = {
+export const NOT_CONTENT = {
   status: StatusCodes.NO_CONTENT,
-  message: getReasonPhrase(StatusCodes.NO_CONTENT),
+  message: 'A requicisão teve sucesso, mas não foi retornado nenhum dado.',
 }
 
 export const NOT_FOUND = {

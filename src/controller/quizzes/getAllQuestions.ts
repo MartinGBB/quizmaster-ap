@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
 import { allQuestions } from '../../services/quiz/getAllQuestions'
+import { OK, NOT_CONTENT } from '../../middlewares/statusErrors'
+import { QuestionData } from '../../types'
+import { handleErrorApi } from '../../middlewares/handleErrorApi'
 
 export async function findQuestions(
   _req: Request,
@@ -7,15 +10,11 @@ export async function findQuestions(
   next: NextFunction,
 ) {
   try {
-    const response = await allQuestions()
-    res.status(200).json(response)
-    // if ('data' in response) {
-    //   const { status, data } = response
-    //   res.status(status).json(data)
-    // } else {
-    //   const { status, message } = response
-    //   res.status(status).json({ message })
-    // }
+    const response: QuestionData[] = await allQuestions()
+    if (response.length < 1) {
+      return handleErrorApi(NOT_CONTENT, _req, res)
+    }
+    res.status(OK).json(response)
   } catch (error) {
     next(error)
   }
