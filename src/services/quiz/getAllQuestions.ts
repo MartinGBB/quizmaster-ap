@@ -1,6 +1,7 @@
 import { getAllQuestions } from '../../model/quizz/findQuestions'
+import { QuestionData } from '../../types'
 
-export const allQuestions = async () => {
-  const results = await getAllQuestions()
+export function allQuestions() {
+  const results: Promise<QuestionData[]> = getAllQuestions()
   return results
 }

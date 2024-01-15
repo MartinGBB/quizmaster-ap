@@ -7,7 +7,15 @@ export async function findQuestions(
   next: NextFunction,
 ) {
   try {
-    res.status(200).json(await allQuestions())
+    const response = await allQuestions()
+    res.status(200).json(response)
+    // if ('data' in response) {
+    //   const { status, data } = response
+    //   res.status(status).json(data)
+    // } else {
+    //   const { status, message } = response
+    //   res.status(status).json({ message })
+    // }
   } catch (error) {
     next(error)
   }
