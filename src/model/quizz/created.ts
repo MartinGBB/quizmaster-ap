@@ -13,13 +13,18 @@ function insertQuery({
   `
   return [query, [quizId, question, JSON.stringify(answers), correctAnswer]]
 }
-
+interface InsertResult {
+  insertId?: number
+  affectedRows: number
+}
 export async function created(params: QuestionData) {
   try {
     const [dataQuery, values] = insertQuery(params)
     const db = connection.promise()
     const result = await db.query(dataQuery as string, values)
-    return result
+    const { insertId } = result[0] as InsertResult
+
+    return insertId
   } catch (error) {
     console.error('Error executing query:', error)
     throw new Error('Error executing query: ' + error)

@@ -12,6 +12,6 @@ function validations(params: QuestionData) {
 
 export async function createQuestion(params: QuestionData) {
   const validateData = validations(params)
-  const data = created(validateData)
+  const data = await created(validateData)
   return data
 }
