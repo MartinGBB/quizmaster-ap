@@ -11,3 +11,13 @@ export const NOT_FOUND = {
   status: StatusCodes.NOT_FOUND,
   message: getReasonPhrase(StatusCodes.NOT_FOUND),
 }
+
+export const CREATED = {
+  status: StatusCodes.CREATED,
+  message: 'Criado com sucesso!',
+}
+
+export const UNPROCESSABLE_ENTITY = {
+  status: StatusCodes.UNPROCESSABLE_ENTITY,
+  message: 'Dado não criado',
+}
