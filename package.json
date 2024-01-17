@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsx .",
-    "dev": "nodemon --exec tsx .",
+    "dev": "nodemon --delay 2 --exec tsx .",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix"
   },
