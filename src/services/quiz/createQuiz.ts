@@ -28,7 +28,7 @@ function validations(params: QuizData) {
   }
 }
 
-export async function createQuestion(params: QuizData) {
+export async function createQuiz(params: QuizData) {
   const validateData = validations(params)
   if ('code' in validateData) return { error: validateData }
 
