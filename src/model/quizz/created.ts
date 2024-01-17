@@ -1,6 +1,11 @@
 import { connection } from '../connection'
 import { QuestionData } from '../../types'
 
+interface InsertResult {
+  insertId?: number
+  affectedRows: number
+}
+
 function insertQuery({
   quiz_id: quizId,
   question,
@@ -13,17 +18,13 @@ function insertQuery({
   `
   return [query, [quizId, question, JSON.stringify(answers), correctAnswer]]
 }
-interface InsertResult {
-  insertId?: number
-  affectedRows: number
-}
+
 export async function created(params: QuestionData) {
   try {
     const [dataQuery, values] = insertQuery(params)
     const db = connection.promise()
     const result = await db.query(dataQuery as string, values)
     const { insertId } = result[0] as InsertResult
-
     return insertId
   } catch (error) {
     console.error('Error executing query:', error)
