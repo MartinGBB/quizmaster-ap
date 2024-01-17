@@ -1,4 +1,4 @@
-import { QuizData } from '../../types'
+import { QuizData } from '../../../types/quiz.interface'
 import { create as createModel } from '../model/create'
 import { ZodError, z } from 'zod'
 
