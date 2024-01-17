@@ -1,5 +1,5 @@
 import express from 'express'
-import { root } from '../entities/root'
+import { root } from './routes'
 import { handleErrorApi } from '../middlewares/handleErrorApi'
 
 export const app = express()

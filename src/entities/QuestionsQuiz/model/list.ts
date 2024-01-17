@@ -1,4 +1,4 @@
-import { QuestionData } from '../../../types'
+import { QuestionData } from '../../../types/quiz.interface'
 import { connection } from '../../../config/database'
 
 export async function list(): Promise<QuestionData[]> {
