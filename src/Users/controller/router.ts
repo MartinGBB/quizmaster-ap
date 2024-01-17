@@ -3,6 +3,6 @@ import { login } from './login'
 
 const router = express.Router({ mergeParams: true })
 
-router.get('/questions', login)
+router.get('/login', login)
 
 export { router }

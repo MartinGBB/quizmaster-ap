@@ -1,4 +1,4 @@
-import { list as listModel } from '../../model/questionsQuiz/list'
+import { list as listModel } from '../../QuestionsQuiz/model/list'
 import { QuestionData } from '../../types'
 
 export function list() {

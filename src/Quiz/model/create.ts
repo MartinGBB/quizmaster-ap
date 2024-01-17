@@ -1,5 +1,5 @@
-import { connection } from '../connection'
-import { QuestionData } from '../../types'
+import { connection } from '../../config/database'
+import { QuizData } from '../../types'
 
 interface InsertResult {
   insertId?: number
@@ -7,19 +7,18 @@ interface InsertResult {
 }
 
 function insertQuery({
-  quiz_id: quizId,
-  question,
-  answers,
-  correct_answer: correctAnswer,
-}: QuestionData) {
+  title,
+  description,
+  number_of_questions: numberOfQuestions,
+}: QuizData) {
   const query = `
-    INSERT INTO questions (quiz_id, question, answers, correct_answer)
-    VALUES (?, ?, ?, ?)
+    INSERT INTO quizzes (title, description, number_of_questions)
+    VALUES (?, ?, ?)
   `
-  return [query, [quizId, question, JSON.stringify(answers), correctAnswer]]
+  return [query, [title, description, numberOfQuestions]]
 }
 
-export async function create(params: QuestionData) {
+export async function create(params: QuizData) {
   try {
     const [dataQuery, values] = insertQuery(params)
     const db = connection.promise()

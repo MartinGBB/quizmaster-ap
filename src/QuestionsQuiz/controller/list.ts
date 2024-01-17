@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { list as listService } from '../../services/questionsQuiz/list'
+import { list as listService } from '../service/list'
 import { OK, NOT_CONTENT } from '../../middlewares/statusErrors'
 import { QuestionData } from '../../types'
 import { handleErrorApi } from '../../middlewares/handleErrorApi'

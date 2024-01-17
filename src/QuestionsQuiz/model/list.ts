@@ -1,5 +1,5 @@
 import { QuestionData } from '../../types'
-import { connection } from '../connection'
+import { connection } from '../../config/database'
 
 export async function list(): Promise<QuestionData[]> {
   try {

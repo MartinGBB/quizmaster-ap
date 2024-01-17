@@ -1,5 +1,5 @@
 import { QuizData } from '../../types'
-import { create as createModel } from '../../model/quizz/create'
+import { create as createModel } from '../model/create'
 import { ZodError, z } from 'zod'
 
 const QuizDataSchema = z.object({

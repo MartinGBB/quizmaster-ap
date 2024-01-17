@@ -1,5 +1,5 @@
 import { QuestionData } from '../../types'
-import { create as createModel } from '../../model/questionsQuiz/create'
+import { create as createModel } from '../../QuestionsQuiz/model/create'
 import { ZodError, z } from 'zod'
 
 const AnswerObject = z.object({
