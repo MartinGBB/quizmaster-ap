@@ -1,5 +1,5 @@
-import { connection } from '../../config/database'
-import { QuizData } from '../../types'
+import { connection } from '../../../config/database'
+import { QuizData } from '../../../types'
 
 interface InsertResult {
   insertId?: number

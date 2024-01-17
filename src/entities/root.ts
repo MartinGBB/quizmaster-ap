@@ -5,8 +5,6 @@ import { router as quiz } from './Quiz/controller/router'
 
 export const root = express.Router({ mergeParams: true })
 
-const users = login
-
-root.use('/user', users)
+root.use('/user', login)
 root.use('/quiz', quiz)
 root.use('/questions', questions)

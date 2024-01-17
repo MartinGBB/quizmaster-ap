@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
 import { list as listService } from '../service/list'
-import { OK, NOT_CONTENT } from '../../middlewares/statusErrors'
-import { QuestionData } from '../../types'
-import { handleErrorApi } from '../../middlewares/handleErrorApi'
+import { OK, NOT_CONTENT } from '../../../middlewares/statusErrors'
+import { QuestionData } from '../../../types'
+import { handleErrorApi } from '../../../middlewares/handleErrorApi'
 
 export async function list(_req: Request, res: Response, next: NextFunction) {
   try {

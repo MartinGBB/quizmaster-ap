@@ -1,6 +1,9 @@
 import { NextFunction, Request, Response } from 'express'
 import { createQuiz as createQuizService } from '../service/created'
-import { CREATED, UNPROCESSABLE_ENTITY } from '../../middlewares/statusErrors'
+import {
+  CREATED,
+  UNPROCESSABLE_ENTITY,
+} from '../../../middlewares/statusErrors'
 
 export async function create(req: Request, res: Response, next: NextFunction) {
   try {
