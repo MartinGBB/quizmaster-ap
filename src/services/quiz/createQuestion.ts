@@ -20,8 +20,12 @@ const AnswerObject = z.object({
 const CorrectAnswerSchema = z.enum(['A', 'B', 'C', 'D'])
 
 const QuestionDataSchema = z.object({
-  quiz_id: z.number({ invalid_type_error: 'Id requerido deve ser um número' }),
-  question: z.string().min(10, { message: 'Minimo 10 caracteres' }),
+  quiz_id: z.number({
+    required_error: 'quiz_id é requerido',
+  }),
+  question: z
+    .string({ required_error: 'question é requerido' })
+    .min(10, { message: 'Minimo 10 caracteres' }),
   answers: AnswerObject,
   correct_answer: CorrectAnswerSchema,
 })
@@ -44,7 +48,7 @@ function validations(params: QuestionData) {
 
 export async function createQuestion(params: QuestionData) {
   const validateData = validations(params)
-  if ('code' in validateData) return validateData
+  if ('code' in validateData) return { error: validateData }
 
   const data = await created(validateData)
   return data
