@@ -19,7 +19,7 @@ function insertQuery({
   return [query, [quizId, question, JSON.stringify(answers), correctAnswer]]
 }
 
-export async function createdQuestion(params: QuestionData) {
+export async function create(params: QuestionData) {
   try {
     const [dataQuery, values] = insertQuery(params)
     const db = connection.promise()

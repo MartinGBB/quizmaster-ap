@@ -12,13 +12,13 @@ function insertQuery({
   number_of_questions: numberOfQuestions,
 }: QuizData) {
   const query = `
-    INSERT INTO quizzes (title, description, numberOfQuestions)
+    INSERT INTO quizzes (title, description, number_of_questions)
     VALUES (?, ?, ?)
   `
   return [query, [title, description, numberOfQuestions]]
 }
 
-export async function created(params: QuizData) {
+export async function create(params: QuizData) {
   try {
     const [dataQuery, values] = insertQuery(params)
     const db = connection.promise()

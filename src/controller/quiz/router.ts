@@ -1,10 +1,9 @@
 import express from 'express'
-import { findQuestions } from './getAllQuestions'
-import { create } from './createQuestion'
+import { create } from './create'
 
 const router = express.Router({ mergeParams: true })
 
-router.get('/', findQuestions)
+router.get('/', () => null)
 router.post('/', create)
 
 export { router }

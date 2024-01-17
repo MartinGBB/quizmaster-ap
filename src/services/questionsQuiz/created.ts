@@ -1,5 +1,5 @@
 import { QuestionData } from '../../types'
-import { createdQuestion } from '../../model/quizz/createdQuestion'
+import { create as createModel } from '../../model/questionsQuiz/create'
 import { ZodError, z } from 'zod'
 
 const AnswerObject = z.object({
@@ -46,10 +46,10 @@ function validations(params: QuestionData) {
   }
 }
 
-export async function createQuestion(params: QuestionData) {
+export async function created(params: QuestionData) {
   const validateData = validations(params)
   if ('code' in validateData) return { error: validateData }
 
-  const data = await createdQuestion(validateData)
+  const data = await createModel(validateData)
   return data
 }

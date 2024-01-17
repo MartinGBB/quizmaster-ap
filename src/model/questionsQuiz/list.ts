@@ -1,7 +1,7 @@
 import { QuestionData } from '../../types'
 import { connection } from '../connection'
 
-export async function getAllQuestions(): Promise<QuestionData[]> {
+export async function list(): Promise<QuestionData[]> {
   try {
     const db = connection.promise()
     const [results] = await db.query('SELECT * FROM questions')

@@ -1,16 +1,12 @@
 import { Request, Response, NextFunction } from 'express'
-import { allQuestions } from '../../services/quiz/getAllQuestions'
+import { list as listService } from '../../services/questionsQuiz/list'
 import { OK, NOT_CONTENT } from '../../middlewares/statusErrors'
 import { QuestionData } from '../../types'
 import { handleErrorApi } from '../../middlewares/handleErrorApi'
 
-export async function findQuestions(
-  _req: Request,
-  res: Response,
-  next: NextFunction,
-) {
+export async function list(_req: Request, res: Response, next: NextFunction) {
   try {
-    const response: QuestionData[] = await allQuestions()
+    const response: QuestionData[] = await listService()
     if (response.length < 1) {
       return handleErrorApi(NOT_CONTENT, _req, res)
     }

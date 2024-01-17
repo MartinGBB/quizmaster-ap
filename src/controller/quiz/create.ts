@@ -1,12 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
-import { createQuiz as createQuizService } from '../../services/quiz/createQuiz'
+import { createQuiz as createQuizService } from '../../services/quiz/created'
 import { CREATED, UNPROCESSABLE_ENTITY } from '../../middlewares/statusErrors'
 
-export async function createQuiz(
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) {
+export async function create(req: Request, res: Response, next: NextFunction) {
   try {
     const data = req.body
     const serviceData = await createQuizService(data)

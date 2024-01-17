@@ -1,5 +1,5 @@
 import { QuizData } from '../../types'
-import { created } from '../../model/quizz/createdQuiz'
+import { create as createModel } from '../../model/quizz/create'
 import { ZodError, z } from 'zod'
 
 const QuizDataSchema = z.object({
@@ -32,6 +32,6 @@ export async function createQuiz(params: QuizData) {
   const validateData = validations(params)
   if ('code' in validateData) return { error: validateData }
 
-  const data = await created(validateData)
+  const data = await createModel(validateData)
   return data
 }

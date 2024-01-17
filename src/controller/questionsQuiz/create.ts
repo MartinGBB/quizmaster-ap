@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from 'express'
-import { createQuestion } from '../../services/quiz/createQuestion'
+import { created as createdService } from '../../services/questionsQuiz/created'
 import { CREATED, UNPROCESSABLE_ENTITY } from '../../middlewares/statusErrors'
 
 export async function create(req: Request, res: Response, next: NextFunction) {
   try {
     const data = req.body
-    const serviceData = await createQuestion(data)
+    const serviceData = await createdService(data)
 
     if (!serviceData) {
       return res.status(404).json('Problema não mapeado ainda')
