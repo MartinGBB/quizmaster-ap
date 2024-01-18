@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { INTERNAL_SERVER_ERROR } from './statusErrors'
 
 interface ApiError {
   message: string
@@ -21,5 +22,5 @@ export function handleErrorApi(
     return res.status(status).json({ error: message, infoErr })
   }
   console.error(err)
-  return res.status(500).json({ error: { message: 'Internal Server Error' } })
+  return res.status(INTERNAL_SERVER_ERROR.status).json({ message })
 }
