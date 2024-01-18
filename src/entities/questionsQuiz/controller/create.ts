@@ -4,6 +4,7 @@ import {
   CREATED,
   UNPROCESSABLE_ENTITY,
 } from '../../../middlewares/statusErrors'
+import { handleErrorApi } from '../../../middlewares/handleErrorApi'
 
 export async function create(req: Request, res: Response, next: NextFunction) {
   try {
@@ -15,7 +16,7 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     }
 
     if (typeof serviceData === 'object') {
-      return res.status(UNPROCESSABLE_ENTITY.status).json(serviceData)
+      return handleErrorApi(UNPROCESSABLE_ENTITY, req, res, serviceData)
     }
     const { status, message } = CREATED
 
