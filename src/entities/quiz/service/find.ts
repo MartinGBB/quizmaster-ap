@@ -2,11 +2,9 @@ import { find as findModel } from '../model/find'
 import { QuizDataResult } from '../../../types/quiz.interface'
 import { ZodError, z } from 'zod'
 
-const QuizIdSchema = z.object({
-  correct_answer: z.number({
-    invalid_type_error: 'Id deve ser um número',
-    required_error: 'Id é requerido',
-  }),
+const QuizIdSchema = z.number({
+  invalid_type_error: 'Id deve ser um número',
+  required_error: 'Id é requerido',
 })
 
 function validateId(id: number) {
@@ -24,20 +22,20 @@ function validateId(id: number) {
   }
 }
 
-export function quizIdExist(data: QuizDataResult[] | null): boolean {
-  return !!data
+export async function quizIdExist(quizId: number) {
+  const validateInput = validateId(quizId)
+  if (!validateInput) return validateInput
+  const result = await findModel(quizId)
+
+  return !!result
 }
 
-export async function find(questionId: number, confirmId = false) {
+export async function find(questionId: number) {
   const validateInput = validateId(questionId)
 
-  if ('code' in validateInput) return validateInput
+  if (!validateInput) return validateInput
 
-  const result: Promise<QuizDataResult[] | null> = findModel(questionId)
+  const result = await findModel(questionId)
 
-  if (confirmId) {
-    const quizExist = quizIdExist(await result)
-    return quizExist
-  }
   return result
 }

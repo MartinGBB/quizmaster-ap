@@ -6,13 +6,11 @@ export async function find(
 ): Promise<QuizDataResult[] | null> {
   try {
     const db = connection.promise()
-    const [result] = await db.query('SELECT * FROM quizzes WHERE id = $1', [
-      questionId,
-    ])
-    const quizData = result
-
-    if (quizData) {
-      return quizData as QuizDataResult[]
+    const [result] = await db.query(
+      `SELECT * FROM quizzes WHERE id =  ${questionId}`,
+    )
+    if (Array.isArray(result) && result.length > 0) {
+      return result as QuizDataResult[]
     } else {
       return null
     }

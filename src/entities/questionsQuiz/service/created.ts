@@ -1,5 +1,5 @@
 import { QuestionData } from '../../../types/questionsQuiz.interface'
-import { find } from '../../quiz/service/find'
+import { quizIdExist } from '../../quiz/service/find'
 import { create as createModel } from '../model/create'
 import { ZodError, z } from 'zod'
 
@@ -35,13 +35,19 @@ const QuestionDataSchema = z.object({
   correct_answer: CorrectAnswerSchema,
 })
 
-function validations(params: QuestionData) {
+async function validateIfQuizExist(quizId: number) {
+  const quizExist = await quizIdExist(quizId)
+
+  if (!quizExist)
+    return { code: 'not_found', message: 'Quiz não existe, verifique o ID' }
+}
+
+async function validations(params: QuestionData) {
   try {
     const validatedParams = QuestionDataSchema.parse(params)
+    const validateQuizId = await validateIfQuizExist(params.quiz_id)
 
-    const quizExist = find(params.quiz_id, true)
-
-    if (!quizExist) return { code: 'not_found', message: 'Quiz não existe' }
+    if (validateQuizId) return validateQuizId
 
     return validatedParams
   } catch (error) {
@@ -56,7 +62,7 @@ function validations(params: QuestionData) {
 }
 
 export async function created(params: QuestionData) {
-  const validateData = validations(params)
+  const validateData = await validations(params)
   if ('code' in validateData) return validateData
 
   const data = await createModel(validateData)
