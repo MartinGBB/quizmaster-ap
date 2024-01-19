@@ -24,7 +24,7 @@ function validateId(id: number) {
   }
 }
 
-export function isValidQuizDataResult(data: QuizDataResult[] | null): boolean {
+export function quizIdExist(data: QuizDataResult[] | null): boolean {
   return !!data
 }
 
@@ -36,7 +36,7 @@ export async function find(questionId: number, confirmId = false) {
   const result: Promise<QuizDataResult[] | null> = findModel(questionId)
 
   if (confirmId) {
-    const quizExist = isValidQuizDataResult(await result)
+    const quizExist = quizIdExist(await result)
     return quizExist
   }
   return result
