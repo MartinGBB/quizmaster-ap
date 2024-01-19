@@ -1,16 +1,14 @@
 import { QuizDataResult } from '../../../types/quiz.interface'
 import { connection } from '../../../config/database'
 
-export async function find(
-  questionId: number,
-): Promise<QuizDataResult[] | null> {
+export async function find(questionId: number): Promise<QuizDataResult | null> {
   try {
     const db = connection.promise()
     const [result] = await db.query(
       `SELECT * FROM quizzes WHERE id =  ${questionId}`,
     )
     if (Array.isArray(result) && result.length > 0) {
-      return result as QuizDataResult[]
+      return result[0] as QuizDataResult
     } else {
       return null
     }

@@ -35,7 +35,7 @@ export async function find(questionId: number) {
 
   if (!validateInput) return validateInput
 
-  const result: QuizDataResult[] | null = await findModel(questionId)
+  const result: QuizDataResult | null = await findModel(questionId)
 
   return result
 }
