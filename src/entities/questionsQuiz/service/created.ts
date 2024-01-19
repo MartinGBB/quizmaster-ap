@@ -1,4 +1,5 @@
 import { QuestionData } from '../../../types/questionsQuiz.interface'
+import { quizIdExist } from '../../quiz/service/find'
 import { create as createModel } from '../model/create'
 import { ZodError, z } from 'zod'
 
@@ -22,17 +23,31 @@ const CorrectAnswerSchema = z.enum(['A', 'B', 'C', 'D'])
 const QuestionDataSchema = z.object({
   quiz_id: z.number({
     required_error: 'quiz_id é requerido',
+    invalid_type_error: 'quiz_id deve ser um número',
   }),
   question: z
-    .string({ required_error: 'question é requerido' })
+    .string({
+      required_error: 'question é requerido',
+      invalid_type_error: 'quiestion deve ser string',
+    })
     .min(10, { message: 'Minimo 10 caracteres' }),
   answers: AnswerObject,
   correct_answer: CorrectAnswerSchema,
 })
 
-function validations(params: QuestionData) {
+async function validateIfQuizExist(quizId: number) {
+  const quizExist = await quizIdExist(quizId)
+
+  if (!quizExist)
+    return { code: 'not_found', message: 'Quiz não existe, verifique o ID' }
+}
+
+async function validations(params: QuestionData) {
   try {
     const validatedParams = QuestionDataSchema.parse(params)
+    const validateQuizId = await validateIfQuizExist(params.quiz_id)
+
+    if (validateQuizId) return validateQuizId
 
     return validatedParams
   } catch (error) {
@@ -47,8 +62,8 @@ function validations(params: QuestionData) {
 }
 
 export async function created(params: QuestionData) {
-  const validateData = validations(params)
-  if ('code' in validateData) return { error: validateData }
+  const validateData = await validations(params)
+  if ('code' in validateData) return validateData
 
   const data = await createModel(validateData)
   return data

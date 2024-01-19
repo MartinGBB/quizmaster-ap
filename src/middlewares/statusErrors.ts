@@ -21,3 +21,8 @@ export const UNPROCESSABLE_ENTITY = {
   status: StatusCodes.UNPROCESSABLE_ENTITY,
   message: 'Dado não criado',
 }
+
+export const INTERNAL_SERVER_ERROR = {
+  status: StatusCodes.INTERNAL_SERVER_ERROR,
+  message: 'Problemas no servidor',
+}
