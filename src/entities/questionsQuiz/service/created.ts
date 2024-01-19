@@ -1,4 +1,5 @@
 import { QuestionData } from '../../../types/questionsQuiz.interface'
+import { find } from '../../quiz/service/find'
 import { create as createModel } from '../model/create'
 import { ZodError, z } from 'zod'
 
@@ -37,6 +38,10 @@ const QuestionDataSchema = z.object({
 function validations(params: QuestionData) {
   try {
     const validatedParams = QuestionDataSchema.parse(params)
+
+    const quizExist = find(params.quiz_id, true)
+
+    if (!quizExist) return { code: 'not_found', message: 'Quiz não existe' }
 
     return validatedParams
   } catch (error) {
