@@ -1,11 +1,5 @@
-import { QuizData } from '../../../types/quiz.interface'
+import { QuizDataResult } from '../../../types/quiz.interface'
 import { connection } from '../../../config/database'
-
-interface QuizDataResult extends QuizData {
-  id: number
-  created_at: Date
-  update_at: Date
-}
 
 export async function find(
   questionId: number,
