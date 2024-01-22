@@ -3,9 +3,11 @@ import { create as createModel } from '../model/create'
 import { ZodError, z } from 'zod'
 
 const QuizDataSchema = z.object({
-  title: z.string({
-    required_error: 'title é requerido',
-  }),
+  title: z
+    .string({
+      required_error: 'title é requerido',
+    })
+    .min(10, 'minimo 10 caracteres'),
   description: z
     .string({ required_error: 'description é requerido' })
     .min(10, { message: 'Minimo 10 caracteres' }),

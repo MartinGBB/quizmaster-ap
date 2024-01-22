@@ -7,9 +7,14 @@ interface ApiError {
 }
 
 export function handleErrorApi(err: ApiError, _req: Request, res: Response) {
-  const infoErr = res.locals.errorInfo
+  const infoErr = res.locals?.errorInfo
+
   const { status, message } = err
+
   if (status) {
+    if (!infoErr) {
+      return res.status(status).json({ error: message })
+    }
     return res.status(status).json({ error: message, infoErr })
   }
   console.error(err)
