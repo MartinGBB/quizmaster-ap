@@ -16,7 +16,8 @@ export async function create(req: Request, res: Response, next: NextFunction) {
     }
 
     if (typeof serviceData === 'object') {
-      return handleErrorApi(UNPROCESSABLE_ENTITY, req, res, serviceData)
+      res.locals.errorInfo = serviceData
+      return handleErrorApi(UNPROCESSABLE_ENTITY, req, res)
     }
     const { status, message } = CREATED
 
