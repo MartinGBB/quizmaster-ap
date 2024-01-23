@@ -5,7 +5,7 @@ export async function list(): Promise<QuizData[]> {
   try {
     const db = connection.promise()
     const [results] = await db.query(
-      'SELECT id, title, description FROM quizzes',
+      'SELECT id, title, description, number_of_questions FROM quizzes',
     )
 
     return results as QuizData[]
