@@ -1,10 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { remove as removeService } from '../service/remove'
-import {
-  BAD_REQUEST,
-  NOT_CONTENT,
-  NOT_FOUND,
-} from '../../../middlewares/statusErrors'
+import { BAD_REQUEST, NOT_FOUND, OK } from '../../../middlewares/statusErrors'
 import { handleErrorApi } from '../../../middlewares/handleErrorApi'
 
 export async function remove(req: Request, res: Response, next: NextFunction) {
@@ -18,7 +14,7 @@ export async function remove(req: Request, res: Response, next: NextFunction) {
     if (!removeResponse) {
       return handleErrorApi(NOT_FOUND, req, res)
     }
-    res.status(NOT_CONTENT.status).json(removeResponse)
+    res.status(OK).json(removeResponse)
   } catch (error) {
     console.error(error)
     next(error)
