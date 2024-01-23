@@ -8,6 +8,28 @@ const QuizIdSchema = z.number({
   required_error: 'Id é requerido',
 })
 
+const QuizDataSchema = z.object({
+  title: z.string().min(10, 'minimo 10 caracteres'),
+  description: z.string().min(10, { message: 'Minimo 10 caracteres' }),
+  number_of_questions: z.literal(10).or(z.literal(15)).or(z.literal(20)),
+})
+
+function paramsValidation(params: QuizData) {
+  try {
+    const validatedParams = QuizDataSchema.parse(params)
+
+    return validatedParams
+  } catch (error) {
+    if (error instanceof ZodError) {
+      const { code, message } = error.errors[0]
+      return { code, message }
+    } else {
+      console.error('Error de validación:', error)
+      throw new Error('Error de validación')
+    }
+  }
+}
+
 function validateId(id: number) {
   try {
     const validationId = QuizIdSchema.parse(id)
@@ -25,6 +47,11 @@ function validateId(id: number) {
 
 export async function update(params: QuizData, id: number) {
   const validateInputId = validateId(id)
+  const validateInputParams = paramsValidation(params)
+
+  if ('code' in validateInputParams) {
+    return { success: false, errorDetails: validateInputParams }
+  }
 
   if ('code' in validateInputId) {
     return { success: false, errorDetails: validateInputId }
