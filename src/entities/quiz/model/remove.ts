@@ -1,24 +1,27 @@
 import { connection } from '../../../config/database'
 import { FieldPacket, ResultSetHeader } from 'mysql2'
 
-function removeQuery(id: number) {
-  const query = `
-  DELETE FROM quizzes WHERE id = ?
-  `
-  return [query, [id]]
-}
+type resultType = [ResultSetHeader, FieldPacket[]]
 
-export async function remove(id: number): Promise<number | null> {
+export async function remove(quizId: number): Promise<number | null> {
   try {
-    const [dataQuery, values] = removeQuery(id)
     const db = connection.promise()
-    const result: [ResultSetHeader, FieldPacket[]] = await db.query(
-      dataQuery as string,
-      values,
+
+    const removedQuestionRows: resultType = await db.query(
+      'DELETE FROM questions WHERE quiz_id = ?',
+      [quizId],
     )
-    const removeData = result[0].affectedRows
-    if (removeData > 0) {
-      return removeData
+
+    const removedQuizRows: resultType = await db.query(
+      'DELETE FROM quizzes WHERE id = ?',
+      [quizId],
+    )
+
+    const removeQuestions = removedQuestionRows[0].affectedRows
+    const removeQuiz = removedQuizRows[0].affectedRows
+
+    if (removeQuestions > 0 && removeQuiz > 0) {
+      return removeQuestions + removeQuiz
     } else {
       return null
     }

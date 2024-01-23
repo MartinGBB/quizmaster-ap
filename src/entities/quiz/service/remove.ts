@@ -22,7 +22,7 @@ function validateId(id: number) {
   }
 }
 
-export async function update(id: number) {
+export async function remove(id: number) {
   const validateInputId = validateId(id)
 
   if ('code' in validateInputId) {
