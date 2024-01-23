@@ -6,21 +6,19 @@ interface ApiError {
   status: number
 }
 
-interface InfoErr {
-  code: string
-  message: string
-}
+export function handleErrorApi(err: ApiError, _req: Request, res: Response) {
+  const infoErr = res.locals?.errorInfo
 
-export function handleErrorApi(
-  err: ApiError,
-  _req: Request,
-  res: Response,
-  infoErr?: InfoErr,
-) {
   const { status, message } = err
+
   if (status) {
+    if (!infoErr) {
+      return res.status(status).json({ error: message })
+    }
     return res.status(status).json({ error: message, infoErr })
   }
   console.error(err)
-  return res.status(INTERNAL_SERVER_ERROR.status).json({ message })
+  return res
+    .status(INTERNAL_SERVER_ERROR.status)
+    .json({ error: message, infoErr })
 }

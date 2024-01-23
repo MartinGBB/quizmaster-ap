@@ -30,12 +30,12 @@ export async function quizIdExist(quizId: number) {
   return !!result
 }
 
-export async function find(questionId: number) {
-  const validateInput = validateId(questionId)
+export async function find(quizId: number) {
+  const validateInput = validateId(quizId)
 
   if (!validateInput) return validateInput
 
-  const result: QuizDataResult | null = await findModel(questionId)
+  const result: QuizDataResult | null = await findModel(quizId)
 
   return result
 }

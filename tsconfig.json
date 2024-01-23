@@ -5,6 +5,7 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "lib": ["ES6"],
+    "sourceMap": true,   
     "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "Node"

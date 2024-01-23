@@ -22,6 +22,11 @@ export const UNPROCESSABLE_ENTITY = {
   message: 'Dado não criado',
 }
 
+export const BAD_REQUEST = {
+  status: StatusCodes.BAD_REQUEST,
+  message: 'Um parametro é requerido é não foi informado',
+}
+
 export const INTERNAL_SERVER_ERROR = {
   status: StatusCodes.INTERNAL_SERVER_ERROR,
   message: 'Problemas no servidor',
